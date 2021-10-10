@@ -1,0 +1,33 @@
+{"intents": [
+    {"tag": "greetings",
+      "patterns": ["Hi", "hey","How are you","How is it going?", "Is anyone there?", "hello", "Good day",
+                    "Hello", "Wassup ?", "Whats up", "Hey", "greetings","hi","wassup"],
+      "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?",
+                    "Hey! What can I do for you ?"]
+    },
+    {"tag": "goodbye",
+      "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "bye", "cao", "see ya"],
+      "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"]
+    },
+    {"tag": "stock market",
+      "patterns": ["what stocks do I own?", "how are my shares?", "what companies am I investing in?", "what am I doing in the markets?","invest","market"],
+      "responses": ["I know that you asked me about stock market and that's pretty cool, isn't it? Zikas & Ali will give me the ability to respond soon (It's about finding a good & free API)"]
+      
+    },
+    {"tag":"name",
+        "patterns":["what is your name", "what should I call you","name","identity"],
+        "responses":["You can call me Vivace's bot!.", "I'm Vivace's bot!"]},
+    {"tag": "weather",
+      "patterns": ["weather", "how is weather today?", "What's the weather like today?", "Currently, how is the weather?", "The weather today is nice", "This morning, what is the weather like", "Climate", "Temperatures","Environment","Conditions outside","What's it like outside?","How's the weather?","Do you have rain?","What's the temperature in","What's the weather forecast for the rest of the week?","Is it hot or cold?","Is it sunny, should I take sunglasses?","Is it raining outside?","Should I take my umbrella?"],
+      "responses": ["I know that you asked me about the weather and that's pretty cool, isn't it? Zikas & Ali will give me the ability to respond soon (It's about finding a good & free API for weather)"]
+    },
+    {"tag": "search",
+      "patterns": ["Look for ", "Do some research", "Look up", "Find out more", "Look for", "Obtain", "Browse", "Research","definition","wikipedia","what's the","what is the definition of ?","what is"],
+      "responses": ["I know that you asked me to search and that's pretty cool, isn't it? Zikas & Ali will give me the ability to respond soon (It's about finding a good & free API)"]
+    },
+    {"tag": "system information",
+      "patterns": ["system information", "Information about the system", "Details about the system", "Data about the system", "CPU", "GPU", "Swap", "Net","disk","GPU","thermal","Fan","RAM","SDD","HDD","computer","PC","processor speed and amount of RAM","How fast is my processor?","Hard Drives"],
+      "responses": ["I know that you asked me about system information and that's pretty cool, isn't it? Zikas & Ali will give me the ability to respond soon (It's about finding a good & free API)"]
+    }     
+  ]
+}
