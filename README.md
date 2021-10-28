@@ -20,8 +20,4 @@ The Webcam for instance could be used for facial recognition to unlock a previou
 
 The application would come free and open source for Linux, and commercialized for Windows and MacOS for a fixed fee that should be decided later.
 
-As a base the ALICE AIML language would be used for the project, then extensions would be used on top of it to further customize the AI to better suit VIVACE's needs, Python would be used too, as VIVACE like leet will both be built using this programming language.
-
-Portions of C could be used to extend Python for performance reasons if need be.
-
-The AIML language and ALICE's involvement in the project are due to dictionaries being already available permitting the AI to hold as near as meaningful possible discussions with the user, which is a planned feature for VIVACE...
+Python will be used as a main programming language and portions of C could be used to extend Python for performance reasons if need be.
