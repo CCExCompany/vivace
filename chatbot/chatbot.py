@@ -2,6 +2,9 @@ import random
 import json
 import pickle
 import numpy as np
+from pyowm import OWM
+from pyowm.utils import config
+from pyowm.utils import timestamps
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -60,6 +63,38 @@ print("AI Chatbot is starting. . . ")
 while True:
     message = input("")
     ints = predict_class(message)
-    res = get_response(ints, intents)
-    print(res)
+    if(ints[0]['intent']=="weather"):
+        
+        owm = OWM("b6c0e313b3cbe8933f23134327491f99")
+        mgr = owm.weather_manager()
 
+        city="Casablanca"
+        # Search for current weather in London (Great Britain) and get details
+        observation = mgr.weather_at_place(city)
+        w = observation.weather
+        
+
+        w.detailed_status         # 'clouds'
+        w.wind()                  # {'speed': 4.6, 'deg': 330}
+        w.humidity                # 87
+        w.temperature('celsius')  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
+        w.rain                    # {}
+        w.heat_index              # None
+        w.clouds                  # 75
+
+        # Will it be clear tomorrow at this time in Milan (Italy) 
+        print("Weather in "+city+" can be descibed: "+w.detailed_status)
+        print("Weather Information:")
+        print("temperature now:",w.temperature('celsius')['feels_like'], ", Average:",w.temperature('celsius')['temp'],", Min:",w.temperature('celsius')['temp_min'],", Max:",w.temperature('celsius')['temp_max'])
+        print("wind speed:",w.wind()['speed'],", wind degree: ",w.wind()['deg'])
+        print("humidity:",w.humidity)
+        if(len(w.rain)==0):
+            print("no rain today")
+        
+        else:
+            print("rain:",w.rain)
+    else:
+        res = get_response(ints, intents)
+        print(res)
+
+ 
