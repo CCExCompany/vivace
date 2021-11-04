@@ -1,3 +1,15 @@
+
+# raw_text="Im going home tomorrow, I'm going home 20 august, I went home yesterday, I went home 04/11/2021"
+# named_entity_recognizer= NER(raw_text)
+# for word in named_entity_recognizer.ents:
+#     print(word.text,word.label_)
+
+
+    
+import spacy
+# python -m spacy download en_core_web_sm
+
+NER = spacy.load("en_core_web_sm")    
 import random
 import json
 import pickle
@@ -8,8 +20,8 @@ from pyowm.utils import timestamps
 
 import nltk
 from nltk.stem import WordNetLemmatizer
-nltk.download('punkt')
-nltk.download('wordnet')
+# nltk.download('punkt')
+# nltk.download('wordnet')
 from tensorflow.keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
@@ -61,8 +73,8 @@ def get_response(intents_list, intents_json):
 print("AI Chatbot is starting. . . ")
 
 while True:
-    message = input("")
-    ints = predict_class(message)
+    user_message = input("")
+    ints = predict_class(user_message)
     if(ints[0]['intent']=="weather"):
         
         owm = OWM("b6c0e313b3cbe8933f23134327491f99")
@@ -93,8 +105,15 @@ while True:
         
         else:
             print("rain:",w.rain)
+        
+        named_entity_recognizer= NER(user_message)
+        for entity in named_entity_recognizer.ents :
+            if 'DATE' in entity.label_ :
+                print("\n I understand that you're asking the weather for a specific date, this option will soon be implemented")
+                break
     else:
         res = get_response(ints, intents)
         print(res)
+        
 
  
