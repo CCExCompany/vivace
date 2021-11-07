@@ -2,13 +2,7 @@
 #https://datascience.stackexchange.com/questions/45854/date-extraction-in-python for dates entity reco
 
 
-from pyowm.utils import timestamps
-from pyowm.owm import OWM
-owm = OWM('b6c0e313b3cbe8933f23134327491f99')
-mgr = owm.weather_manager()
-daily_forecaster = mgr.forecast_at_place('Berlin,DE', 'daily')
-tomorrow = timestamps.tomorrow()                                   # datetime object for tomorrow
-weather = daily_forecaster.get_weather_at(tomorrow) 
+
 
 
 #---------------------------------------------------------------------------------    
