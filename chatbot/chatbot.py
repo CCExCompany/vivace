@@ -1,11 +1,17 @@
-
-# raw_text="Im going home tomorrow, I'm going home 20 august, I went home yesterday, I went home 04/11/2021"
-# named_entity_recognizer= NER(raw_text)
-# for word in named_entity_recognizer.ents:
-#     print(word.text,word.label_)
+#https://pypi.org/project/locationtagger/ for cities entity reco
+#https://datascience.stackexchange.com/questions/45854/date-extraction-in-python for dates entity reco
 
 
-    
+from pyowm.utils import timestamps
+from pyowm.owm import OWM
+owm = OWM('b6c0e313b3cbe8933f23134327491f99')
+mgr = owm.weather_manager()
+daily_forecaster = mgr.forecast_at_place('Berlin,DE', 'daily')
+tomorrow = timestamps.tomorrow()                                   # datetime object for tomorrow
+weather = daily_forecaster.get_weather_at(tomorrow) 
+
+
+#---------------------------------------------------------------------------------    
 import spacy
 # python -m spacy download en_core_web_sm
 
@@ -79,9 +85,26 @@ while True:
         
         owm = OWM("b6c0e313b3cbe8933f23134327491f99")
         mgr = owm.weather_manager()
-
-        city="Casablanca"
-        # Search for current weather in London (Great Britain) and get details
+        
+        #Check if user provided a location or time 
+        named_entity_recognizer= NER(user_message)
+        date_flag = False
+        gpe_flag = False
+        for entity in named_entity_recognizer.ents :
+            if 'DATE' in entity.label_ and date_flag == False:
+                print("\n I understand that you're asking the weather for a specific date, this option will soon be implemented")
+                date_flag = True
+            if 'GPE' in entity.label_ and gpe_flag == False:
+                city = entity.text
+                gpe_flag = True
+            if gpe_flag == True and date_flag == True :
+                break
+            
+        #if no city was provided, set it to casablanca
+        if city == None:
+            city = "Casablanca"
+            
+        # Search for current weather in selected city
         observation = mgr.weather_at_place(city)
         w = observation.weather
         
@@ -94,8 +117,8 @@ while True:
         w.heat_index              # None
         w.clouds                  # 75
 
-        # Will it be clear tomorrow at this time in Milan (Italy) 
-        print("Weather in "+city+" can be descibed: "+w.detailed_status)
+        # Describe the weather
+        print("Weather in "+city+" can be desrcibed: "+w.detailed_status)
         print("Weather Information:")
         print("temperature now:",w.temperature('celsius')['feels_like'], ", Average:",w.temperature('celsius')['temp'],", Min:",w.temperature('celsius')['temp_min'],", Max:",w.temperature('celsius')['temp_max'])
         print("wind speed:",w.wind()['speed'],", wind degree: ",w.wind()['deg'])
@@ -107,10 +130,10 @@ while True:
             print("rain:",w.rain)
         
         named_entity_recognizer= NER(user_message)
-        for entity in named_entity_recognizer.ents :
-            if 'DATE' in entity.label_ :
-                print("\n I understand that you're asking the weather for a specific date, this option will soon be implemented")
-                break
+        date_flag = False
+        gpe_flag = False
+        
+                
     else:
         res = get_response(ints, intents)
         print(res)
